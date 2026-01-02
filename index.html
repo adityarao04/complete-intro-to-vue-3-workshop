@@ -10,16 +10,39 @@
 
 <body>
     <h1>hello world</h1>
-    <div id="app">{{ message}}</div>
+    <div id="app">
+        <!-- directives in Vue (directives are all attributes beginning with v-) -->
+        <p v-if="message.length % 2 === 0">
+         Even: {{ message}}
+        </p>
+        <p v-else>
+         odd: {{ message}}
+        </p>
+        <ul>
+            <li v-for="number in listOfNumbers">{{number * 2}}</li>
+        </ul>
+        <div v-for="item in listOfData">
+            <h4>{{item.name}}</h4>
+            <p>Age: {{item.age}}</p>
+            <p>Hobbies:</p>
+            <ul>
+                <li v-for="hobby in item.hobbies">{{hobby}}</li>
+            </ul>
+        </div>
+    </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         const {
             createApp
         } = Vue;
         const app = createApp({
+            //  data keyword is used in the Vue options API to define reactive data properties for a Vue component or instance.
             data() {
                 return {
-                    message: "hello world it works"
+                    message: "hello world it work",
+                    listOfNumbers: [1,2,3,4,5],
+                    listOfData: [{name: "john", age: 20, hobbies: ["reading", "gaming"]}, {name: "doe", age: 25, hobbies: ["sports", "cooking"]}, {name: "alice", age: 30, hobbies: ["traveling", "photography"]}, {name: "bob", age: 22, hobbies: ["music", "hiking"]}]
+
                 }
             }
         });
