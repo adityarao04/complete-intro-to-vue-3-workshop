@@ -5,29 +5,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Friends</title>
 </head>
 
 <body>
-    <h1>hello world</h1>
     <div id="app">
-        <!-- directives in Vue (directives are all attributes beginning with v-) -->
-        <p v-if="message.length % 2 === 0">
-         Even: {{ message}}
-        </p>
-        <p v-else>
-         odd: {{ message}}
-        </p>
-        <ul>
-            <li v-for="number in listOfNumbers">{{number * 2}}</li>
-        </ul>
-        <div v-for="item in listOfData">
-            <h4>{{item.name}}</h4>
-            <p>Age: {{item.age}}</p>
-            <p>Hobbies:</p>
+        <p v-if="listOfCharacters.length === 0">there are no Characters</p>
+        <div v-else>
+            <p>here are the list of characters:</p>
             <ul>
-                <li v-for="hobby in item.hobbies">{{hobby}}</li>
+                <li v-for="(character, index) in listOfCharacters" :key="character.name">{{ character.name }} - {{ index}}</li>
             </ul>
+            <p>comma separated values of characters : {{ listOfCharacters.map(character => character.name).join(', ') }}</p>
         </div>
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -37,11 +26,9 @@
         } = Vue;
         const app = createApp({
             //  data keyword is used in the Vue options API to define reactive data properties for a Vue component or instance.
-            data() {
+            data: () => {
                 return {
-                    message: "hello world it work",
-                    listOfNumbers: [1,2,3,4,5],
-                    listOfData: [{name: "john", age: 20, hobbies: ["reading", "gaming"]}, {name: "doe", age: 25, hobbies: ["sports", "cooking"]}, {name: "alice", age: 30, hobbies: ["traveling", "photography"]}, {name: "bob", age: 22, hobbies: ["music", "hiking"]}]
+                    listOfCharacters:[{name:'Monica'}, {name:'Ross'}, {name:'Rachel'}, {name:'Chandler'}, {name:'Joey'}, {name:'Phoebe'}]
 
                 }
             }
