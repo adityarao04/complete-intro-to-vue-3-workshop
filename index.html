@@ -11,6 +11,19 @@
 <body>
     <h1>hello world</h1>
     <div id="app">
+        <h3>{{count}}</h3>
+        <button v-on:click="increment">Increment</button>
+
+        <div class="">
+            <input type="number"
+           v-model="incrementAmount"
+            >
+            <!-- <input type="number"
+            v-bind:value="incrementAmount"
+            v-on:input="setIncrementAmount"
+            > -->
+        </div>
+              <hr/>
         <!-- directives in Vue (directives are all attributes beginning with v-) -->
         <p v-if="message.length % 2 === 0">
          Even: {{ message}}
@@ -29,25 +42,38 @@
                 <li v-for="hobby in item.hobbies">{{hobby}}</li>
             </ul>
         </div>
+  
     </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        const {
-            createApp
-        } = Vue;
-        const app = createApp({
-            //  data keyword is used in the Vue options API to define reactive data properties for a Vue component or instance.
-            data() {
-                return {
-                    message: "hello world it work",
-                    listOfNumbers: [1,2,3,4,5],
-                    listOfData: [{name: "john", age: 20, hobbies: ["reading", "gaming"]}, {name: "doe", age: 25, hobbies: ["sports", "cooking"]}, {name: "alice", age: 30, hobbies: ["traveling", "photography"]}, {name: "bob", age: 22, hobbies: ["music", "hiking"]}]
+const { createApp } = Vue;
 
-                }
-            }
-        });
+const app = createApp({
+    data: () =>{
+        return {
+            count: 10,
+            incrementAmount: 1,
+            message: "Hello Vue Directives!",
+            listOfNumbers: [1,2,3,4,5],
+            listOfData: [
+                {name: "Alice", age: 30, hobbies: ["Reading", "Hiking", "Coding"]},
+                {name: "Bob", age: 25, hobbies: ["Gaming", "Cooking"]},
+                {name: "Charlie", age: 35, hobbies: ["Traveling", "Swimming", "Photography"]}
+            ]
+        }
+    },
+    methods:{
+        increment(){
+            this.count += this.incrementAmount;
+        },
+        setIncrementAmount(event){
+            console.log(event.target.value);
+            this.incrementAmount = Number(event.target.value);
+        }
+    }
+})
 
-        app.mount('#app');
+app.mount('#app');
     </script>
 </body>
 
